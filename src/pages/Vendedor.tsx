@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Plus, Edit, Trash2, Package } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -35,8 +35,13 @@ export default function Vendedor() {
     images: 'https://picsum.photos/seed/product/800/800',
   });
 
+  useEffect(() => {
+    if (!isAuthenticated || !user || user.role !== 'SELLER') {
+      navigate('/login');
+    }
+  }, [isAuthenticated, user, navigate]);
+
   if (!isAuthenticated || !user || user.role !== 'SELLER') {
-    navigate('/login');
     return null;
   }
 
