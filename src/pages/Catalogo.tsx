@@ -147,12 +147,11 @@ export default function Catalogo() {
                 {/* Category */}
                 <div>
                   <label className="text-sm font-medium mb-2 block">Categoría</label>
-                  <Select value={selectedCategory} onValueChange={handleCategoryChange}>
+                  <Select value={selectedCategory || undefined} onValueChange={handleCategoryChange}>
                     <SelectTrigger>
                       <SelectValue placeholder="Todas las categorías" />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="">Todas las categorías</SelectItem>
                       {categories.map((cat) => (
                         <SelectItem key={cat.id} value={cat.id}>
                           {cat.name}
