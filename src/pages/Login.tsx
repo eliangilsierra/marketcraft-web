@@ -65,7 +65,7 @@ export default function Login() {
           className="flex items-center justify-center gap-2 font-bold text-2xl text-primary mb-8"
         >
           <Store className="h-8 w-8" />
-          MarketPlace
+          Marketcraft
         </Link>
 
         <Card className="p-6">

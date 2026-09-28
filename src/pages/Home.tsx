@@ -17,7 +17,7 @@ export default function Home() {
           <div className="max-w-3xl mx-auto text-center">
             <div className="inline-flex items-center gap-2 bg-primary/10 px-4 py-2 rounded-full text-sm font-medium text-primary mb-6">
               <Sparkles className="h-4 w-4" />
-              Bienvenido a MarketPlace
+              Bienvenido a Marketcraft
             </div>
             <h1 className="text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
               Encuentra todo lo que necesitas
@@ -33,7 +33,7 @@ export default function Home() {
                 </Link>
               </Button>
               <Button size="lg" variant="outline" asChild>
-                <Link to="/vendedor">Vender en MarketPlace</Link>
+                <Link to="/vendedor">Vender en Marketcraft</Link>
               </Button>
             </div>
           </div>

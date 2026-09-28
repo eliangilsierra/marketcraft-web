@@ -41,7 +41,7 @@ export function Navbar() {
             className="flex items-center gap-2 font-bold text-xl text-primary hover:opacity-80 transition-opacity"
           >
             <Store className="h-6 w-6" />
-            <span className="hidden sm:inline">MarketPlace</span>
+            <span className="hidden sm:inline">Marketcraft</span>
           </Link>
 
           {/* Search Bar */}

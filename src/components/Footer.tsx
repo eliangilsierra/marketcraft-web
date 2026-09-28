@@ -9,7 +9,7 @@ export function Footer() {
           <div>
             <Link to="/" className="flex items-center gap-2 font-bold text-xl text-primary mb-4">
               <Store className="h-6 w-6" />
-              MarketPlace
+              Marketcraft
             </Link>
             <p className="text-sm text-muted-foreground">
               Tu marketplace de confianza para encontrar todo lo que necesitas.
@@ -75,7 +75,7 @@ export function Footer() {
         </div>
 
         <div className="mt-8 pt-8 border-t text-center text-sm text-muted-foreground">
-          <p>&copy; {new Date().getFullYear()} MarketPlace. Todos los derechos reservados.</p>
+          <p>&copy; {new Date().getFullYear()} Marketcraft. Todos los derechos reservados.</p>
         </div>
       </div>
     </footer>
