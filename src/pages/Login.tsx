@@ -30,7 +30,7 @@ export default function Login() {
       await login(loginData.email, loginData.password);
       toast.success('¡Bienvenido de nuevo!');
       navigate('/');
-    } catch (error) {
+    } catch (_error) {
       toast.error('Error al iniciar sesión');
     } finally {
       setIsLoading(false);
@@ -50,7 +50,7 @@ export default function Login() {
       );
       toast.success('¡Cuenta creada con éxito!');
       navigate('/');
-    } catch (error) {
+    } catch (_error) {
       toast.error('Error al crear cuenta');
     } finally {
       setIsLoading(false);
