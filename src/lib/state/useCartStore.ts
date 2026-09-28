@@ -23,7 +23,9 @@ export const useCartStore = create<CartState>()(
 
         set((state) => {
           const existingItem = state.items.find(
-            (item) => item.productId === productId && JSON.stringify(item.variant) === JSON.stringify(variant)
+            (item) =>
+              item.productId === productId &&
+              JSON.stringify(item.variant) === JSON.stringify(variant)
           );
 
           if (existingItem) {
@@ -33,7 +35,8 @@ export const useCartStore = create<CartState>()(
             }
             return {
               items: state.items.map((item) =>
-                item.productId === productId && JSON.stringify(item.variant) === JSON.stringify(variant)
+                item.productId === productId &&
+                JSON.stringify(item.variant) === JSON.stringify(variant)
                   ? { ...item, qty: newQty }
                   : item
               ),
@@ -77,8 +80,8 @@ export const useCartStore = create<CartState>()(
         return items.reduce((total, item) => {
           const product = products.find((p) => p.id === item.productId);
           if (!product) return total;
-          const price = product.discount 
-            ? product.priceCOP * (1 - product.discount / 100) 
+          const price = product.discount
+            ? product.priceCOP * (1 - product.discount / 100)
             : product.priceCOP;
           return total + price * item.qty;
         }, 0);

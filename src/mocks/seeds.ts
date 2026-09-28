@@ -126,7 +126,8 @@ function generateProducts(): Product[] {
 
   categories.forEach((category) => {
     const titles = productTitles[category.id as keyof typeof productTitles] || [];
-    const productsPerCategory = Math.floor(80 / categories.length) + faker.number.int({ min: 0, max: 2 });
+    const productsPerCategory =
+      Math.floor(80 / categories.length) + faker.number.int({ min: 0, max: 2 });
 
     for (let i = 0; i < productsPerCategory; i++) {
       const title = titles[i % titles.length] || faker.commerce.productName();
@@ -139,8 +140,9 @@ function generateProducts(): Product[] {
         title,
         description: faker.commerce.productDescription(),
         priceCOP: basePrice,
-        images: Array.from({ length: faker.number.int({ min: 1, max: 4 }) }, (_, idx) => 
-          `https://picsum.photos/seed/${idCounter}-${idx}/800/800`
+        images: Array.from(
+          { length: faker.number.int({ min: 1, max: 4 }) },
+          (_, idx) => `https://picsum.photos/seed/${idCounter}-${idx}/800/800`
         ),
         categoryId: category.id,
         rating: faker.number.float({ min: 3.5, max: 5, fractionDigits: 1 }),
@@ -151,7 +153,10 @@ function generateProducts(): Product[] {
           ? [
               {
                 name: 'Color',
-                values: faker.helpers.arrayElements(['Negro', 'Blanco', 'Azul', 'Rojo', 'Verde'], { min: 2, max: 4 }),
+                values: faker.helpers.arrayElements(['Negro', 'Blanco', 'Azul', 'Rojo', 'Verde'], {
+                  min: 2,
+                  max: 4,
+                }),
               },
             ]
           : undefined,

@@ -53,7 +53,13 @@ export default function Checkout() {
     setIsProcessing(true);
 
     // Validaciones básicas
-    if (!formData.name || !formData.email || !formData.phone || !formData.address || !formData.city) {
+    if (
+      !formData.name ||
+      !formData.email ||
+      !formData.phone ||
+      !formData.address ||
+      !formData.city
+    ) {
       toast.error('Por favor completa todos los campos');
       setIsProcessing(false);
       return;
@@ -168,7 +174,10 @@ export default function Checkout() {
               {/* Payment Method */}
               <Card className="p-6">
                 <h2 className="text-xl font-bold mb-6">Método de Pago</h2>
-                <RadioGroup value={formData.paymentMethod} onValueChange={(value) => setFormData({ ...formData, paymentMethod: value })}>
+                <RadioGroup
+                  value={formData.paymentMethod}
+                  onValueChange={(value) => setFormData({ ...formData, paymentMethod: value })}
+                >
                   <div className="flex items-center space-x-3 border rounded-lg p-4">
                     <RadioGroupItem value="credit-card" id="credit-card" />
                     <Label htmlFor="credit-card" className="cursor-pointer flex-1">

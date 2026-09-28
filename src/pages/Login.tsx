@@ -42,7 +42,12 @@ export default function Login() {
     setIsLoading(true);
 
     try {
-      await register(registerData.name, registerData.email, registerData.password, registerData.role);
+      await register(
+        registerData.name,
+        registerData.email,
+        registerData.password,
+        registerData.role
+      );
       toast.success('¡Cuenta creada con éxito!');
       navigate('/');
     } catch (error) {
@@ -55,7 +60,10 @@ export default function Login() {
   return (
     <div className="min-h-screen flex items-center justify-center py-12 px-4">
       <div className="w-full max-w-md">
-        <Link to="/" className="flex items-center justify-center gap-2 font-bold text-2xl text-primary mb-8">
+        <Link
+          to="/"
+          className="flex items-center justify-center gap-2 font-bold text-2xl text-primary mb-8"
+        >
           <Store className="h-8 w-8" />
           MarketPlace
         </Link>

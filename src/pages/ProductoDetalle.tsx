@@ -4,7 +4,13 @@ import { Star, Heart, ShoppingCart, Truck, Shield, ArrowLeft } from 'lucide-reac
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Card } from '@/components/ui/card';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
 import { products, categories } from '@/mocks/seeds';
 import { formatCOP, calculateDiscountPrice } from '@/lib/utils/currency';
 import { useCartStore } from '@/lib/state/useCartStore';
@@ -53,7 +59,9 @@ export default function ProductoDetalle() {
       return;
     }
     addItem(product.id, quantity, selectedVariants);
-    toast.success(`${quantity} ${quantity === 1 ? 'producto agregado' : 'productos agregados'} al carrito`);
+    toast.success(
+      `${quantity} ${quantity === 1 ? 'producto agregado' : 'productos agregados'} al carrito`
+    );
   };
 
   const handleToggleFavorite = () => {
@@ -91,11 +99,17 @@ export default function ProductoDetalle() {
                     key={idx}
                     onClick={() => setSelectedImage(idx)}
                     className={cn(
-                      "aspect-square rounded-lg overflow-hidden border-2 transition-all",
-                      selectedImage === idx ? "border-primary" : "border-transparent hover:border-muted-foreground/20"
+                      'aspect-square rounded-lg overflow-hidden border-2 transition-all',
+                      selectedImage === idx
+                        ? 'border-primary'
+                        : 'border-transparent hover:border-muted-foreground/20'
                     )}
                   >
-                    <img src={image} alt={`${product.title} ${idx + 1}`} className="w-full h-full object-cover" />
+                    <img
+                      src={image}
+                      alt={`${product.title} ${idx + 1}`}
+                      className="w-full h-full object-cover"
+                    />
                   </button>
                 ))}
               </div>
@@ -106,7 +120,10 @@ export default function ProductoDetalle() {
           <div className="space-y-6">
             <div>
               {category && (
-                <Link to={`/catalogo?category=${category.id}`} className="text-sm text-primary hover:underline">
+                <Link
+                  to={`/catalogo?category=${category.id}`}
+                  className="text-sm text-primary hover:underline"
+                >
                   {category.name}
                 </Link>
               )}
@@ -129,7 +146,9 @@ export default function ProductoDetalle() {
                     </span>
                   </>
                 ) : (
-                  <span className="text-4xl font-bold text-primary">{formatCOP(product.priceCOP)}</span>
+                  <span className="text-4xl font-bold text-primary">
+                    {formatCOP(product.priceCOP)}
+                  </span>
                 )}
               </div>
             </div>
@@ -197,7 +216,12 @@ export default function ProductoDetalle() {
 
             {/* Actions */}
             <div className="flex gap-3">
-              <Button size="lg" className="flex-1" onClick={handleAddToCart} disabled={product.stock === 0}>
+              <Button
+                size="lg"
+                className="flex-1"
+                onClick={handleAddToCart}
+                disabled={product.stock === 0}
+              >
                 <ShoppingCart className="mr-2 h-5 w-5" />
                 Agregar al Carrito
               </Button>
@@ -205,9 +229,9 @@ export default function ProductoDetalle() {
                 size="lg"
                 variant="outline"
                 onClick={handleToggleFavorite}
-                className={cn(favorite && "text-destructive border-destructive")}
+                className={cn(favorite && 'text-destructive border-destructive')}
               >
-                <Heart className={cn("h-5 w-5", favorite && "fill-current")} />
+                <Heart className={cn('h-5 w-5', favorite && 'fill-current')} />
               </Button>
             </div>
 
@@ -218,7 +242,9 @@ export default function ProductoDetalle() {
                   <Truck className="h-5 w-5 text-primary mt-0.5" />
                   <div>
                     <p className="font-medium">Envío gratis</p>
-                    <p className="text-sm text-muted-foreground">En compras superiores a $100.000</p>
+                    <p className="text-sm text-muted-foreground">
+                      En compras superiores a $100.000
+                    </p>
                   </div>
                 </div>
                 <div className="flex items-start gap-3">

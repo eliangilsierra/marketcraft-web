@@ -36,7 +36,10 @@ export function Navbar() {
       <div className="container mx-auto px-4">
         <div className="flex h-16 items-center justify-between gap-4">
           {/* Logo */}
-          <Link to="/" className="flex items-center gap-2 font-bold text-xl text-primary hover:opacity-80 transition-opacity">
+          <Link
+            to="/"
+            className="flex items-center gap-2 font-bold text-xl text-primary hover:opacity-80 transition-opacity"
+          >
             <Store className="h-6 w-6" />
             <span className="hidden sm:inline">MarketPlace</span>
           </Link>
@@ -66,7 +69,10 @@ export function Navbar() {
               <Button variant="ghost" size="icon">
                 <ShoppingCart className="h-5 w-5" />
                 {itemCount > 0 && (
-                  <Badge variant="secondary" className="absolute -top-1 -right-1 h-5 w-5 flex items-center justify-center p-0 text-xs">
+                  <Badge
+                    variant="secondary"
+                    className="absolute -top-1 -right-1 h-5 w-5 flex items-center justify-center p-0 text-xs"
+                  >
                     {itemCount}
                   </Badge>
                 )}
@@ -77,7 +83,10 @@ export function Navbar() {
               <Button variant="ghost" size="icon" className="hidden sm:flex">
                 <Heart className="h-5 w-5" />
                 {favorites.length > 0 && (
-                  <Badge variant="secondary" className="absolute -top-1 -right-1 h-5 w-5 flex items-center justify-center p-0 text-xs">
+                  <Badge
+                    variant="secondary"
+                    className="absolute -top-1 -right-1 h-5 w-5 flex items-center justify-center p-0 text-xs"
+                  >
                     {favorites.length}
                   </Badge>
                 )}

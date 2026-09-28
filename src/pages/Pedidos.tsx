@@ -77,9 +77,7 @@ export default function Pedidos() {
                   </p>
                 </div>
                 <div className="flex items-center gap-3">
-                  <Badge variant={statusVariants[order.status]}>
-                    {statusLabels[order.status]}
-                  </Badge>
+                  <Badge variant={statusVariants[order.status]}>{statusLabels[order.status]}</Badge>
                   <Dialog>
                     <DialogTrigger asChild>
                       <Button variant="outline" size="sm">
@@ -131,7 +129,10 @@ export default function Pedidos() {
                               if (!product) return null;
 
                               return (
-                                <div key={item.productId} className="flex gap-3 border rounded-lg p-3">
+                                <div
+                                  key={item.productId}
+                                  className="flex gap-3 border rounded-lg p-3"
+                                >
                                   <img
                                     src={product.images[0]}
                                     alt={product.title}
@@ -151,7 +152,9 @@ export default function Pedidos() {
                                     )}
                                   </div>
                                   <div className="text-right">
-                                    <p className="font-medium">{formatCOP(product.priceCOP * item.qty)}</p>
+                                    <p className="font-medium">
+                                      {formatCOP(product.priceCOP * item.qty)}
+                                    </p>
                                   </div>
                                 </div>
                               );
@@ -189,7 +192,9 @@ export default function Pedidos() {
                   <span className="text-muted-foreground">
                     {order.items.length} {order.items.length === 1 ? 'producto' : 'productos'}
                   </span>
-                  <span className="font-bold text-lg text-primary">{formatCOP(order.totalCOP)}</span>
+                  <span className="font-bold text-lg text-primary">
+                    {formatCOP(order.totalCOP)}
+                  </span>
                 </div>
                 {order.shippingAddress && (
                   <p className="text-sm text-muted-foreground">

@@ -73,9 +73,7 @@ export default function Carrito() {
                             .join(', ')}
                         </p>
                       )}
-                      <p className="text-lg font-bold text-primary mt-2">
-                        {formatCOP(finalPrice)}
-                      </p>
+                      <p className="text-lg font-bold text-primary mt-2">{formatCOP(finalPrice)}</p>
                     </div>
 
                     <div className="flex flex-col items-end justify-between">
@@ -129,9 +127,7 @@ export default function Carrito() {
                     {shipping === 0 ? 'Gratis' : formatCOP(shipping)}
                   </span>
                 </div>
-                {shipping === 0 && (
-                  <p className="text-sm text-success">🎉 ¡Tienes envío gratis!</p>
-                )}
+                {shipping === 0 && <p className="text-sm text-success">🎉 ¡Tienes envío gratis!</p>}
                 {subtotal < 100000 && shipping > 0 && (
                   <p className="text-sm text-muted-foreground">
                     Te faltan {formatCOP(100000 - subtotal)} para envío gratis

@@ -6,7 +6,13 @@ import { Card } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
 import { useAuthStore } from '@/lib/state/useAuthStore';
 import { categories } from '@/mocks/seeds';
 import { formatCOP } from '@/lib/utils/currency';
@@ -126,9 +132,7 @@ export default function Vendedor() {
         <div className="flex items-center justify-between mb-8">
           <div>
             <h1 className="text-4xl font-bold mb-2">Panel de Vendedor</h1>
-            <p className="text-muted-foreground">
-              Gestiona tus productos ({myProducts.length})
-            </p>
+            <p className="text-muted-foreground">Gestiona tus productos ({myProducts.length})</p>
           </div>
           <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
             <DialogTrigger asChild>
@@ -255,9 +259,7 @@ export default function Vendedor() {
                     {product.description}
                   </p>
                   <div className="flex items-center justify-between mb-4">
-                    <p className="text-xl font-bold text-primary">
-                      {formatCOP(product.priceCOP)}
-                    </p>
+                    <p className="text-xl font-bold text-primary">{formatCOP(product.priceCOP)}</p>
                     <p className="text-sm text-muted-foreground">Stock: {product.stock}</p>
                   </div>
                   <div className="flex gap-2">
@@ -270,11 +272,7 @@ export default function Vendedor() {
                       <Edit className="mr-1 h-3 w-3" />
                       Editar
                     </Button>
-                    <Button
-                      variant="outline"
-                      size="sm"
-                      onClick={() => handleDelete(product.id)}
-                    >
+                    <Button variant="outline" size="sm" onClick={() => handleDelete(product.id)}>
                       <Trash2 className="h-3 w-3 text-destructive" />
                     </Button>
                   </div>

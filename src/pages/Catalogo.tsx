@@ -4,7 +4,13 @@ import { ProductCard } from '@/components/ProductCard';
 import { EmptyState } from '@/components/EmptyState';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
 import { Slider } from '@/components/ui/slider';
 import { Card } from '@/components/ui/card';
 import { Search, Filter, Package } from 'lucide-react';
@@ -25,9 +31,10 @@ export default function Catalogo() {
 
     // Buscar por término
     if (searchQuery) {
-      filtered = filtered.filter((p) =>
-        p.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        p.description.toLowerCase().includes(searchQuery.toLowerCase())
+      filtered = filtered.filter(
+        (p) =>
+          p.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+          p.description.toLowerCase().includes(searchQuery.toLowerCase())
       );
     }
 
@@ -147,7 +154,10 @@ export default function Catalogo() {
                 {/* Category */}
                 <div>
                   <label className="text-sm font-medium mb-2 block">Categoría</label>
-                  <Select value={selectedCategory || undefined} onValueChange={handleCategoryChange}>
+                  <Select
+                    value={selectedCategory || undefined}
+                    onValueChange={handleCategoryChange}
+                  >
                     <SelectTrigger>
                       <SelectValue placeholder="Todas las categorías" />
                     </SelectTrigger>
@@ -182,10 +192,13 @@ export default function Catalogo() {
                 {/* Sort */}
                 <div>
                   <label className="text-sm font-medium mb-2 block">Ordenar por</label>
-                  <Select value={sortBy} onValueChange={(value) => {
-                    setSortBy(value);
-                    setCurrentPage(1);
-                  }}>
+                  <Select
+                    value={sortBy}
+                    onValueChange={(value) => {
+                      setSortBy(value);
+                      setCurrentPage(1);
+                    }}
+                  >
                     <SelectTrigger>
                       <SelectValue />
                     </SelectTrigger>

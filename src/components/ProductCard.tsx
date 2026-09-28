@@ -62,12 +62,12 @@ export function ProductCard({ product }: ProductCardProps) {
             variant="ghost"
             size="icon"
             className={cn(
-              "absolute top-3 right-3 bg-card/80 backdrop-blur-sm hover:bg-card",
-              favorite && "text-destructive hover:text-destructive"
+              'absolute top-3 right-3 bg-card/80 backdrop-blur-sm hover:bg-card',
+              favorite && 'text-destructive hover:text-destructive'
             )}
             onClick={handleToggleFavorite}
           >
-            <Heart className={cn("h-4 w-4", favorite && "fill-current")} />
+            <Heart className={cn('h-4 w-4', favorite && 'fill-current')} />
           </Button>
         </div>
 
@@ -88,24 +88,16 @@ export function ProductCard({ product }: ProductCardProps) {
                 <p className="text-sm text-muted-foreground line-through">
                   {formatCOP(product.priceCOP)}
                 </p>
-                <p className="text-xl font-bold text-primary">
-                  {formatCOP(finalPrice)}
-                </p>
+                <p className="text-xl font-bold text-primary">{formatCOP(finalPrice)}</p>
               </div>
             ) : (
-              <p className="text-xl font-bold text-primary">
-                {formatCOP(product.priceCOP)}
-              </p>
+              <p className="text-xl font-bold text-primary">{formatCOP(product.priceCOP)}</p>
             )}
           </div>
         </CardContent>
 
         <CardFooter className="p-4 pt-0">
-          <Button 
-            className="w-full" 
-            onClick={handleAddToCart}
-            disabled={product.stock === 0}
-          >
+          <Button className="w-full" onClick={handleAddToCart} disabled={product.stock === 0}>
             <ShoppingCart className="mr-2 h-4 w-4" />
             Agregar al Carrito
           </Button>

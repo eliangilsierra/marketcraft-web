@@ -19,18 +19,42 @@ export function Footer() {
           <div>
             <h3 className="font-semibold mb-4">Enlaces Rápidos</h3>
             <ul className="space-y-2 text-sm text-muted-foreground">
-              <li><Link to="/catalogo" className="hover:text-primary transition-colors">Catálogo</Link></li>
-              <li><Link to="/carrito" className="hover:text-primary transition-colors">Carrito</Link></li>
-              <li><Link to="/pedidos" className="hover:text-primary transition-colors">Mis Pedidos</Link></li>
+              <li>
+                <Link to="/catalogo" className="hover:text-primary transition-colors">
+                  Catálogo
+                </Link>
+              </li>
+              <li>
+                <Link to="/carrito" className="hover:text-primary transition-colors">
+                  Carrito
+                </Link>
+              </li>
+              <li>
+                <Link to="/pedidos" className="hover:text-primary transition-colors">
+                  Mis Pedidos
+                </Link>
+              </li>
             </ul>
           </div>
 
           <div>
             <h3 className="font-semibold mb-4">Ayuda</h3>
             <ul className="space-y-2 text-sm text-muted-foreground">
-              <li><a href="#" className="hover:text-primary transition-colors">Preguntas Frecuentes</a></li>
-              <li><a href="#" className="hover:text-primary transition-colors">Envíos y Devoluciones</a></li>
-              <li><a href="#" className="hover:text-primary transition-colors">Contacto</a></li>
+              <li>
+                <a href="#" className="hover:text-primary transition-colors">
+                  Preguntas Frecuentes
+                </a>
+              </li>
+              <li>
+                <a href="#" className="hover:text-primary transition-colors">
+                  Envíos y Devoluciones
+                </a>
+              </li>
+              <li>
+                <a href="#" className="hover:text-primary transition-colors">
+                  Contacto
+                </a>
+              </li>
             </ul>
           </div>
 

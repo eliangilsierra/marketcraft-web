@@ -5,6 +5,7 @@ Un marketplace funcional y moderno construido con React, TypeScript, Tailwind CS
 ## 🚀 Características
 
 ### Funcionalidades Principales
+
 - ✅ **Catálogo Completo**: 80+ productos con búsqueda, filtros y ordenamiento
 - ✅ **Detalle de Producto**: Galería de imágenes, variantes, gestión de stock
 - ✅ **Carrito Inteligente**: Control de stock, cálculo de envío, persistencia local
@@ -15,6 +16,7 @@ Un marketplace funcional y moderno construido con React, TypeScript, Tailwind CS
 - ✅ **Autenticación Mock**: Login con roles (USER/SELLER)
 
 ### Características Técnicas
+
 - 🎨 **Diseño Moderno**: Inspirado en marketplaces profesionales
 - 🌙 **Modo Oscuro**: Soporte completo con tema personalizado
 - 📱 **100% Responsivo**: Optimizado para móvil, tablet y desktop
@@ -68,21 +70,22 @@ src/
 
 ## 🎯 Páginas y Rutas
 
-| Ruta | Descripción |
-|------|-------------|
-| `/` | Inicio con hero, categorías y productos destacados |
-| `/catalogo` | Catálogo completo con filtros y paginación |
-| `/producto/:slug` | Detalle del producto con galería y variantes |
-| `/carrito` | Carrito de compras con resumen |
-| `/checkout` | Proceso de pago (simulado) |
-| `/pedidos` | Historial de pedidos del usuario |
-| `/vendedor` | Panel CRUD para vendedores |
-| `/login` | Login/registro (mock) |
-| `/favoritos` | Lista de productos favoritos |
+| Ruta              | Descripción                                        |
+| ----------------- | -------------------------------------------------- |
+| `/`               | Inicio con hero, categorías y productos destacados |
+| `/catalogo`       | Catálogo completo con filtros y paginación         |
+| `/producto/:slug` | Detalle del producto con galería y variantes       |
+| `/carrito`        | Carrito de compras con resumen                     |
+| `/checkout`       | Proceso de pago (simulado)                         |
+| `/pedidos`        | Historial de pedidos del usuario                   |
+| `/vendedor`       | Panel CRUD para vendedores                         |
+| `/login`          | Login/registro (mock)                              |
+| `/favoritos`      | Lista de productos favoritos                       |
 
 ## 🚀 Inicio Rápido
 
 ### Prerrequisitos
+
 - Node.js 18+ y npm
 
 ### Instalación
@@ -104,13 +107,16 @@ La aplicación estará disponible en `http://localhost:8080`
 ## 🧪 Datos de Prueba
 
 ### Autenticación Mock
+
 - **Email**: cualquier email válido
   - Si incluye "seller" → Rol SELLER
   - De lo contrario → Rol USER
 - **Contraseña**: cualquier valor (mock)
 
 ### Categorías
+
 10 categorías con productos distribuidos:
+
 - Electrónica
 - Ropa y Moda
 - Hogar y Muebles
@@ -123,6 +129,7 @@ La aplicación estará disponible en `http://localhost:8080`
 - Jardín
 
 ### Productos
+
 - 80+ productos generados con Faker
 - Precios: COP $20.000 - $5.000.000
 - Ratings: 3.5 - 5.0 estrellas
@@ -133,23 +140,27 @@ La aplicación estará disponible en `http://localhost:8080`
 ## 💡 Características Especiales
 
 ### Carrito Inteligente
+
 - Validación de stock en tiempo real
 - No permite agregar más del stock disponible
 - Cálculo automático de envío (gratis >$100.000)
 - Persistencia en localStorage
 
 ### Sistema de Favoritos
+
 - Toggle rápido desde tarjetas de producto
 - Persistencia local
 - Página dedicada para gestión
 
 ### Panel de Vendedor
+
 - Crear productos con validación
 - Editar productos existentes
 - Eliminar productos
 - Vista previa con stock
 
 ### Filtros y Búsqueda
+
 - Búsqueda por título/descripción
 - Filtro por categoría
 - Rango de precios con slider
@@ -162,17 +173,21 @@ La aplicación estará disponible en `http://localhost:8080`
 ## 🎨 Sistema de Diseño
 
 ### Paleta de Colores
+
 - **Primario**: Azul océano (HSL 200, 95%, 45%)
 - **Secundario**: Coral/naranja (HSL 20, 90%, 55%)
 - **Éxito**: Verde esmeralda (HSL 142, 76%, 36%)
 - Soporte completo para modo oscuro
 
 ### Componentes
+
 Todos los componentes utilizan el design system definido en:
+
 - `src/index.css`: Variables CSS (HSL)
 - `tailwind.config.ts`: Configuración de Tailwind
 
 ### Sombras y Efectos
+
 - `shadow-soft`: Sombra suave para elementos
 - `shadow-card`: Sombra para tarjetas
 - `shadow-float`: Sombra elevada
@@ -206,6 +221,7 @@ Todos los componentes utilizan el design system definido en:
 ## 📝 Notas Técnicas
 
 ### Intercambiar Mock por HTTP Real
+
 El proyecto está preparado para intercambiar los datos mock por una API real:
 
 1. Implementar servicios HTTP en `/lib/api`
@@ -213,9 +229,11 @@ El proyecto está preparado para intercambiar los datos mock por una API real:
 3. Configurar variable de entorno `NEXT_PUBLIC_API_MODE`
 
 ### Seeds Reproducibles
+
 Los datos mock son reproducibles gracias a `faker.seed(12345)` en `src/mocks/seeds.ts`
 
 ### Persistencia
+
 - **Cart**: `cart-storage` (localStorage)
 - **Auth**: `auth-storage` (localStorage)
 - **Favorites**: `favorites-storage` (localStorage)
