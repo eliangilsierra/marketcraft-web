@@ -1,250 +1,143 @@
-# MarketPlace - E-commerce Moderno con Datos Mock
+# Marketcraft
 
-Un marketplace funcional y moderno construido con React, TypeScript, Tailwind CSS y shadcn/ui. Incluye catálogo completo, carrito de compras, checkout simulado, gestión de pedidos y panel de vendedor con datos mock.
+A modern e-commerce marketplace reference application built with React,
+TypeScript, and Tailwind CSS — from catalog to checkout, with a clean,
+swappable data layer.
 
-## 🚀 Características
+[![CI](https://github.com/eliangilsierra/marketcraft-web/actions/workflows/ci.yml/badge.svg)](https://github.com/eliangilsierra/marketcraft-web/actions/workflows/ci.yml)
+![React](https://img.shields.io/badge/React-18-61DAFB?logo=react&logoColor=black)
+![TypeScript](https://img.shields.io/badge/TypeScript-5-3178C6?logo=typescript&logoColor=white)
+![Vite](https://img.shields.io/badge/Vite-5-646CFF?logo=vite&logoColor=white)
+![License](https://img.shields.io/badge/license-MIT-green)
 
-### Funcionalidades Principales
+## What is this
 
-- ✅ **Catálogo Completo**: 80+ productos con búsqueda, filtros y ordenamiento
-- ✅ **Detalle de Producto**: Galería de imágenes, variantes, gestión de stock
-- ✅ **Carrito Inteligente**: Control de stock, cálculo de envío, persistencia local
-- ✅ **Checkout Simulado**: Formulario completo con confirmación de pedido
-- ✅ **Gestión de Pedidos**: Historial con detalles y estados
-- ✅ **Panel Vendedor**: CRUD de productos con validaciones
-- ✅ **Sistema de Favoritos**: Con persistencia en localStorage
-- ✅ **Autenticación Mock**: Login con roles (USER/SELLER)
+Marketcraft demonstrates a full commerce flow — catalog browsing, product
+detail with variants, cart, checkout, order history, and a seller dashboard
+with product CRUD — on top of a clean, swappable data layer designed to move
+from mock data to a real API without rewriting the app. It ships with a
+localized (`es-CO`, Colombian Spanish + COP currency) storefront UI and
+reproducible mock data (Faker with a fixed seed).
 
-### Características Técnicas
+**Problem it addresses.** Most React e-commerce starters are either "toy"
+projects (catalog + cart, nothing else) or lack a data layer designed to be
+swapped for a real backend. Marketcraft shows the full flow — buyer _and_
+seller — with an architecture ready to plug into a real API (see
+[docs/architecture.md](./docs/architecture.md)).
 
-- 🎨 **Diseño Moderno**: Inspirado en marketplaces profesionales
-- 🌙 **Modo Oscuro**: Soporte completo con tema personalizado
-- 📱 **100% Responsivo**: Optimizado para móvil, tablet y desktop
-- 💾 **Persistencia Local**: Carrito, favoritos y auth en localStorage
-- 🇨🇴 **Localización es-CO**: Formato de moneda (COP) y fechas en español
-- ⚡ **Performance**: Carga rápida con lazy loading de imágenes
-- ♿ **Accesibilidad**: ARIA labels y navegación por teclado
-- 🎯 **SEO**: Meta tags optimizados y estructura semántica
+**Who it's for.** Developers evaluating this as a portfolio piece, and
+developers looking for a well-structured marketplace starter to build on.
 
-## 🛠️ Stack Tecnológico
+## Features
 
-- **Framework**: React 18 + TypeScript + Vite
-- **UI**: Tailwind CSS + shadcn/ui + lucide-react
-- **Estado**: Zustand con persistencia
-- **Formularios**: React Hook Form + Zod
-- **Mock Data**: Faker.js con seeds reproducibles
-- **Utilidades**: date-fns, formateo COP, navegación React Router
+- **Catalog** — search, category filter, price range, multi-mode sort, pagination
+- **Product detail** — image gallery, variant selection, stock-aware quantity picker, related products
+- **Cart** — stock validation, free-shipping threshold, localStorage persistence
+- **Checkout** — shipping form, simulated payment, order confirmation
+- **Order history** — per-user orders with status and full line-item detail
+- **Seller dashboard** — create/edit/delete products with validation
+- **Favorites** — toggle from any product card, persisted, dedicated page
+- **Mock auth** — role-based (`USER`/`SELLER`) login, no real backend required
+- **Dark mode**, fully responsive, `es-CO` localization (COP currency, Spanish copy)
 
-## 📂 Estructura del Proyecto
+## Architecture overview
 
-```
-src/
-├── components/          # Componentes reutilizables
-│   ├── Navbar.tsx      # Barra de navegación con búsqueda
-│   ├── Footer.tsx      # Pie de página
-│   ├── ProductCard.tsx # Tarjeta de producto
-│   └── EmptyState.tsx  # Estados vacíos
-├── pages/              # Páginas de la aplicación
-│   ├── Home.tsx        # Inicio con hero y destacados
-│   ├── Catalogo.tsx    # Catálogo con filtros
-│   ├── ProductoDetalle.tsx # Detalle del producto
-│   ├── Carrito.tsx     # Carrito de compras
-│   ├── Checkout.tsx    # Proceso de pago
-│   ├── Pedidos.tsx     # Historial de pedidos
-│   ├── Vendedor.tsx    # Panel de vendedor
-│   ├── Login.tsx       # Autenticación
-│   └── Favoritos.tsx   # Lista de favoritos
-├── lib/
-│   ├── state/          # Stores de Zustand
-│   │   ├── useAuthStore.ts
-│   │   ├── useCartStore.ts
-│   │   ├── useFavoritesStore.ts
-│   │   └── useOrderStore.ts
-│   └── utils/          # Utilidades
-│       └── currency.ts # Formateo COP
-├── mocks/
-│   └── seeds.ts        # Datos mock (productos, categorías)
-└── types/
-    └── index.ts        # Tipos TypeScript
-```
+Pages read data through a repository layer (`src/lib/repositories/`)
+instead of importing mock data directly, so swapping mock data for a real
+API touches two files, not nine. Business logic (catalog filtering,
+shipping cost) lives in pure, independently-tested functions rather than
+inline in components. See **[docs/architecture.md](./docs/architecture.md)**
+for the full picture and **[docs/decisions.md](./docs/decisions.md)** for
+the reasoning behind each non-obvious call (including documented,
+deliberate gaps — this isn't a project that hides its technical debt).
 
-## 🎯 Páginas y Rutas
+## Tech stack
 
-| Ruta              | Descripción                                        |
-| ----------------- | -------------------------------------------------- |
-| `/`               | Inicio con hero, categorías y productos destacados |
-| `/catalogo`       | Catálogo completo con filtros y paginación         |
-| `/producto/:slug` | Detalle del producto con galería y variantes       |
-| `/carrito`        | Carrito de compras con resumen                     |
-| `/checkout`       | Proceso de pago (simulado)                         |
-| `/pedidos`        | Historial de pedidos del usuario                   |
-| `/vendedor`       | Panel CRUD para vendedores                         |
-| `/login`          | Login/registro (mock)                              |
-| `/favoritos`      | Lista de productos favoritos                       |
+| Layer         | Choice                                                     |
+| ------------- | ---------------------------------------------------------- |
+| Framework     | React 18 + TypeScript + Vite                               |
+| UI            | Tailwind CSS + shadcn/ui (Radix primitives) + lucide-react |
+| State         | Zustand, persisted to `localStorage`                       |
+| Forms         | React Hook Form + Zod                                      |
+| Data fetching | TanStack Query (ready for a real API)                      |
+| Mock data     | Faker.js, seeded for reproducibility                       |
+| Testing       | Vitest + React Testing Library                             |
 
-## 🚀 Inicio Rápido
+## Installation
 
-### Prerrequisitos
-
-- Node.js 18+ y npm
-
-### Instalación
+Prerequisites: Node.js 18+ and npm.
 
 ```bash
-# Clonar el repositorio
-git clone <YOUR_GIT_URL>
-cd <YOUR_PROJECT_NAME>
-
-# Instalar dependencias
+git clone https://github.com/eliangilsierra/marketcraft-web.git
+cd marketcraft-web
 npm install
+```
 
-# Iniciar servidor de desarrollo
+## Environment variables
+
+None are required to run this project today. See
+[`.env.example`](./.env.example) for why the file exists anyway and what it
+will hold once a real API is wired in.
+
+## Running locally
+
+```bash
 npm run dev
 ```
 
-La aplicación estará disponible en `http://localhost:8080`
+The app runs at `http://localhost:8080`.
 
-## 🧪 Datos de Prueba
+## Available scripts
 
-### Autenticación Mock
+See **[docs/development.md](./docs/development.md)** for the full list
+(build, lint, typecheck, format, test) and the pre-PR checklist.
 
-- **Email**: cualquier email válido
-  - Si incluye "seller" → Rol SELLER
-  - De lo contrario → Rol USER
-- **Contraseña**: cualquier valor (mock)
+## Testing
 
-### Categorías
-
-10 categorías con productos distribuidos:
-
-- Electrónica
-- Ropa y Moda
-- Hogar y Muebles
-- Deportes
-- Libros
-- Juguetes
-- Belleza y Cuidado
-- Alimentos y Bebidas
-- Mascotas
-- Jardín
-
-### Productos
-
-- 80+ productos generados con Faker
-- Precios: COP $20.000 - $5.000.000
-- Ratings: 3.5 - 5.0 estrellas
-- Stock variable: 0 - 150 unidades
-- ~30% con descuentos del 5-40%
-- ~15% marcados como destacados
-
-## 💡 Características Especiales
-
-### Carrito Inteligente
-
-- Validación de stock en tiempo real
-- No permite agregar más del stock disponible
-- Cálculo automático de envío (gratis >$100.000)
-- Persistencia en localStorage
-
-### Sistema de Favoritos
-
-- Toggle rápido desde tarjetas de producto
-- Persistencia local
-- Página dedicada para gestión
-
-### Panel de Vendedor
-
-- Crear productos con validación
-- Editar productos existentes
-- Eliminar productos
-- Vista previa con stock
-
-### Filtros y Búsqueda
-
-- Búsqueda por título/descripción
-- Filtro por categoría
-- Rango de precios con slider
-- Ordenamiento múltiple:
-  - Destacados
-  - Precio (asc/desc)
-  - Mejor calificados
-  - Más recientes
-
-## 🎨 Sistema de Diseño
-
-### Paleta de Colores
-
-- **Primario**: Azul océano (HSL 200, 95%, 45%)
-- **Secundario**: Coral/naranja (HSL 20, 90%, 55%)
-- **Éxito**: Verde esmeralda (HSL 142, 76%, 36%)
-- Soporte completo para modo oscuro
-
-### Componentes
-
-Todos los componentes utilizan el design system definido en:
-
-- `src/index.css`: Variables CSS (HSL)
-- `tailwind.config.ts`: Configuración de Tailwind
-
-### Sombras y Efectos
-
-- `shadow-soft`: Sombra suave para elementos
-- `shadow-card`: Sombra para tarjetas
-- `shadow-float`: Sombra elevada
-- Transiciones suaves en hover
-
-## 📦 Dependencias Principales
-
-```json
-{
-  "zustand": "State management con persistencia",
-  "msw": "Mock Service Worker (preparado)",
-  "@faker-js/faker": "Generación de datos mock",
-  "react-hook-form": "Gestión de formularios",
-  "zod": "Validación de esquemas",
-  "date-fns": "Formateo de fechas",
-  "sonner": "Sistema de toasts",
-  "lucide-react": "Iconos",
-  "shadcn/ui": "Componentes UI"
-}
+```bash
+npm test          # run once
+npm run test:watch  # watch mode
 ```
 
-## 🚧 Próximas Mejoras (Opcionales)
+## Deployment
 
-- [ ] Cupones de descuento ("PRIMERA-COMPRA")
-- [ ] Banner de promociones temporales
-- [ ] Calificaciones de usuarios reales
-- [ ] Chat de soporte
-- [ ] Comparador de productos
-- [ ] Integración con API real (intercambiar mock)
+`npm run build` produces a static `dist/` folder deployable to any static
+host (Netlify, Vercel, Cloudflare Pages, GitHub Pages, S3 + CloudFront,
+etc.) — there's no server-side runtime requirement.
 
-## 📝 Notas Técnicas
+## Project structure
 
-### Intercambiar Mock por HTTP Real
+```
+src/
+├── components/        Shared components (+ components/ui/ for shadcn primitives)
+├── pages/              One component per route
+├── lib/
+│   ├── state/           Zustand stores
+│   ├── repositories/     Mock-data ↔ real-API seam
+│   ├── catalog/           Pure filter/sort logic
+│   ├── cart/               Cart-specific pure helpers
+│   ├── utils/                Currency formatting, discount math
+│   ├── constants.ts            Centralized magic numbers
+│   └── shipping.ts              Shipping-cost calculation
+├── mocks/seeds.ts        Faker-generated product/category data
+├── types/index.ts         Shared TypeScript types
+└── test/setup.ts           Vitest + Testing Library setup
+```
 
-El proyecto está preparado para intercambiar los datos mock por una API real:
+Full breakdown in [docs/architecture.md](./docs/architecture.md).
 
-1. Implementar servicios HTTP en `/lib/api`
-2. Cambiar imports en stores y pages
-3. Configurar variable de entorno `NEXT_PUBLIC_API_MODE`
+## Roadmap
 
-### Seeds Reproducibles
+- [ ] Wire the seller dashboard's product CRUD into the shared catalog (needs a `sellerId` field — see [ADR-003](./docs/decisions.md#adr-003-seller-product-crud-is-intentionally-not-wired-into-the-shared-catalog))
+- [ ] Real API integration behind the existing repository layer
+- [ ] Upgrade Vite 5 → 8, React Router 6 → 7, Vitest 2 → 5 together (see [ADR-005](./docs/decisions.md#adr-005-known-dependency-vulnerabilities-deferred-not-force-upgraded))
+- [ ] Real payment gateway integration
+- [ ] Multi-region i18n (currently `es-CO` only)
 
-Los datos mock son reproducibles gracias a `faker.seed(12345)` en `src/mocks/seeds.ts`
+## Contributing
 
-### Persistencia
+See **[CONTRIBUTING.md](./CONTRIBUTING.md)**.
 
-- **Cart**: `cart-storage` (localStorage)
-- **Auth**: `auth-storage` (localStorage)
-- **Favorites**: `favorites-storage` (localStorage)
-- **Orders**: `order-storage` (localStorage)
+## License
 
-## 📄 Licencia
-
-Este proyecto es un demo educativo creado con Lovable.
-
----
-
-**¡Listo para producción!** 🎉
-
-El marketplace está completamente funcional con datos mock y preparado para integración con backend real.
+[MIT](./LICENSE)

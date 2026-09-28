@@ -3,6 +3,11 @@
   "private": true,
   "version": "0.1.0",
   "description": "A modern e-commerce marketplace built with React, TypeScript, and clean architecture — from catalog to checkout.",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/eliangilsierra/marketcraft-web.git"
+  },
   "type": "module",
   "scripts": {
     "dev": "vite",
