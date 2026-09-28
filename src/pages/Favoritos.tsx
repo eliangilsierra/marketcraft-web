@@ -2,11 +2,11 @@ import { Heart } from 'lucide-react';
 import { ProductCard } from '@/components/ProductCard';
 import { EmptyState } from '@/components/EmptyState';
 import { useFavoritesStore } from '@/lib/state/useFavoritesStore';
-import { products } from '@/mocks/seeds';
+import { getProductsByIds } from '@/lib/repositories/productRepository';
 
 export default function Favoritos() {
   const favorites = useFavoritesStore((state) => state.favorites);
-  const favoriteProducts = products.filter((p) => favorites.includes(p.id));
+  const favoriteProducts = getProductsByIds(favorites);
 
   if (favoriteProducts.length === 0) {
     return (

@@ -14,7 +14,7 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 import { useAuthStore } from '@/lib/state/useAuthStore';
-import { categories } from '@/mocks/seeds';
+import { getAllCategories } from '@/lib/repositories/categoryRepository';
 import { formatCOP } from '@/lib/utils/currency';
 import { toast } from 'sonner';
 import {
@@ -25,6 +25,8 @@ import {
   DialogTrigger,
 } from '@/components/ui/dialog';
 import type { Product } from '@/types';
+
+const categories = getAllCategories();
 
 export default function Vendedor() {
   const navigate = useNavigate();

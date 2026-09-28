@@ -1,0 +1,10 @@
+export const FREE_SHIPPING_THRESHOLD_COP = 100_000;
+export const STANDARD_SHIPPING_COP = 15_000;
+
+export const CATALOG_PAGE_SIZE = 12;
+export const CATALOG_MIN_PRICE_COP = 0;
+export const CATALOG_MAX_PRICE_COP = 5_000_000;
+
+export const FEATURED_PRODUCTS_LIMIT = 8;
+export const DISCOUNTED_PRODUCTS_LIMIT = 4;
+export const RELATED_PRODUCTS_LIMIT = 4;

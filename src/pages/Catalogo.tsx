@@ -14,62 +14,31 @@ import {
 import { Slider } from '@/components/ui/slider';
 import { Card } from '@/components/ui/card';
 import { Search, Filter, Package } from 'lucide-react';
-import { products, categories } from '@/mocks/seeds';
 import { formatCOP } from '@/lib/utils/currency';
+import { getAllCategories } from '@/lib/repositories/categoryRepository';
+import { searchProducts } from '@/lib/repositories/productRepository';
+import { CATALOG_MAX_PRICE_COP, CATALOG_PAGE_SIZE } from '@/lib/constants';
+import type { Filters } from '@/types';
+
+const categories = getAllCategories();
 
 export default function Catalogo() {
   const [searchParams, setSearchParams] = useSearchParams();
   const [searchQuery, setSearchQuery] = useState(searchParams.get('search') || '');
   const [selectedCategory, setSelectedCategory] = useState(searchParams.get('category') || '');
-  const [priceRange, setPriceRange] = useState([0, 5000000]);
-  const [sortBy, setSortBy] = useState<string>('featured');
+  const [priceRange, setPriceRange] = useState([0, CATALOG_MAX_PRICE_COP]);
+  const [sortBy, setSortBy] = useState<Filters['sort']>('featured');
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 12;
+  const itemsPerPage = CATALOG_PAGE_SIZE;
 
   const filteredAndSortedProducts = useMemo(() => {
-    let filtered = [...products];
-
-    // Buscar por término
-    if (searchQuery) {
-      filtered = filtered.filter(
-        (p) =>
-          p.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-          p.description.toLowerCase().includes(searchQuery.toLowerCase())
-      );
-    }
-
-    // Filtrar por categoría
-    if (selectedCategory) {
-      filtered = filtered.filter((p) => p.categoryId === selectedCategory);
-    }
-
-    // Filtrar por rango de precio
-    filtered = filtered.filter((p) => p.priceCOP >= priceRange[0] && p.priceCOP <= priceRange[1]);
-
-    // Ordenar
-    switch (sortBy) {
-      case 'price-asc':
-        filtered.sort((a, b) => a.priceCOP - b.priceCOP);
-        break;
-      case 'price-desc':
-        filtered.sort((a, b) => b.priceCOP - a.priceCOP);
-        break;
-      case 'rating':
-        filtered.sort((a, b) => b.rating - a.rating);
-        break;
-      case 'newest':
-        filtered.sort((a, b) => parseInt(b.id) - parseInt(a.id));
-        break;
-      default:
-        // Featured: priorizar featured primero, luego rating
-        filtered.sort((a, b) => {
-          if (a.featured && !b.featured) return -1;
-          if (!a.featured && b.featured) return 1;
-          return b.rating - a.rating;
-        });
-    }
-
-    return filtered;
+    return searchProducts({
+      search: searchQuery || undefined,
+      categoryId: selectedCategory || undefined,
+      minPrice: priceRange[0],
+      maxPrice: priceRange[1],
+      sort: sortBy,
+    });
   }, [searchQuery, selectedCategory, priceRange, sortBy]);
 
   const totalPages = Math.ceil(filteredAndSortedProducts.length / itemsPerPage);
@@ -104,7 +73,7 @@ export default function Catalogo() {
   const clearFilters = () => {
     setSearchQuery('');
     setSelectedCategory('');
-    setPriceRange([0, 5000000]);
+    setPriceRange([0, CATALOG_MAX_PRICE_COP]);
     setSortBy('featured');
     setCurrentPage(1);
     setSearchParams({});
@@ -178,7 +147,7 @@ export default function Catalogo() {
                   </label>
                   <Slider
                     min={0}
-                    max={5000000}
+                    max={CATALOG_MAX_PRICE_COP}
                     step={50000}
                     value={priceRange}
                     onValueChange={(value) => {
@@ -195,7 +164,7 @@ export default function Catalogo() {
                   <Select
                     value={sortBy}
                     onValueChange={(value) => {
-                      setSortBy(value);
+                      setSortBy(value as Filters['sort']);
                       setCurrentPage(1);
                     }}
                   >

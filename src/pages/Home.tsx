@@ -2,12 +2,14 @@ import { Link } from 'react-router-dom';
 import { ArrowRight, ShoppingBag, Sparkles, TrendingUp } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { ProductCard } from '@/components/ProductCard';
-import { categories, products } from '@/mocks/seeds';
 import { Card } from '@/components/ui/card';
+import { getAllCategories } from '@/lib/repositories/categoryRepository';
+import { getDiscountedProducts, getFeaturedProducts } from '@/lib/repositories/productRepository';
 
 export default function Home() {
-  const featuredProducts = products.filter((p) => p.featured).slice(0, 8);
-  const discountedProducts = products.filter((p) => p.discount).slice(0, 4);
+  const categories = getAllCategories();
+  const featuredProducts = getFeaturedProducts();
+  const discountedProducts = getDiscountedProducts();
 
   return (
     <div className="min-h-screen">

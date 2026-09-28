@@ -4,20 +4,22 @@ import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { EmptyState } from '@/components/EmptyState';
 import { useCartStore } from '@/lib/state/useCartStore';
-import { products } from '@/mocks/seeds';
+import { getProductById } from '@/lib/repositories/productRepository';
 import { formatCOP, calculateDiscountPrice } from '@/lib/utils/currency';
 import { Separator } from '@/components/ui/separator';
+import { calculateShippingCOP } from '@/lib/shipping';
+import { FREE_SHIPPING_THRESHOLD_COP } from '@/lib/constants';
 
 export default function Carrito() {
   const { items, removeItem, updateQuantity, getTotal } = useCartStore();
 
   const cartItemsWithProducts = items.map((item) => {
-    const product = products.find((p) => p.id === item.productId);
+    const product = getProductById(item.productId);
     return { ...item, product: product! };
   });
 
   const subtotal = getTotal();
-  const shipping = subtotal > 100000 ? 0 : 15000;
+  const shipping = calculateShippingCOP(subtotal);
   const total = subtotal + shipping;
 
   if (items.length === 0) {
@@ -128,9 +130,9 @@ export default function Carrito() {
                   </span>
                 </div>
                 {shipping === 0 && <p className="text-sm text-success">🎉 ¡Tienes envío gratis!</p>}
-                {subtotal < 100000 && shipping > 0 && (
+                {subtotal < FREE_SHIPPING_THRESHOLD_COP && shipping > 0 && (
                   <p className="text-sm text-muted-foreground">
-                    Te faltan {formatCOP(100000 - subtotal)} para envío gratis
+                    Te faltan {formatCOP(FREE_SHIPPING_THRESHOLD_COP - subtotal)} para envío gratis
                   </p>
                 )}
               </div>

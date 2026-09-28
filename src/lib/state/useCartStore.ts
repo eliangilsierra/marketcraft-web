@@ -1,7 +1,9 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
-import type { CartItem, Product } from '@/types';
-import { products } from '@/mocks/seeds';
+import type { CartItem } from '@/types';
+import { getProductById } from '@/lib/repositories/productRepository';
+import { calculateDiscountPrice } from '@/lib/utils/currency';
+import { variantKey } from '@/lib/cart/variantKey';
 
 interface CartState {
   items: CartItem[];
@@ -18,14 +20,13 @@ export const useCartStore = create<CartState>()(
     (set, get) => ({
       items: [],
       addItem: (productId, qty = 1, variant) => {
-        const product = products.find((p) => p.id === productId);
+        const product = getProductById(productId);
         if (!product) return;
 
         set((state) => {
           const existingItem = state.items.find(
             (item) =>
-              item.productId === productId &&
-              JSON.stringify(item.variant) === JSON.stringify(variant)
+              item.productId === productId && variantKey(item.variant) === variantKey(variant)
           );
 
           if (existingItem) {
@@ -35,8 +36,7 @@ export const useCartStore = create<CartState>()(
             }
             return {
               items: state.items.map((item) =>
-                item.productId === productId &&
-                JSON.stringify(item.variant) === JSON.stringify(variant)
+                item.productId === productId && variantKey(item.variant) === variantKey(variant)
                   ? { ...item, qty: newQty }
                   : item
               ),
@@ -58,7 +58,7 @@ export const useCartStore = create<CartState>()(
         }));
       },
       updateQuantity: (productId, qty) => {
-        const product = products.find((p) => p.id === productId);
+        const product = getProductById(productId);
         if (!product || qty < 0 || qty > product.stock) return;
 
         if (qty === 0) {
@@ -78,10 +78,10 @@ export const useCartStore = create<CartState>()(
       getTotal: () => {
         const { items } = get();
         return items.reduce((total, item) => {
-          const product = products.find((p) => p.id === item.productId);
+          const product = getProductById(item.productId);
           if (!product) return total;
           const price = product.discount
-            ? product.priceCOP * (1 - product.discount / 100)
+            ? calculateDiscountPrice(product.priceCOP, product.discount)
             : product.priceCOP;
           return total + price * item.qty;
         }, 0);

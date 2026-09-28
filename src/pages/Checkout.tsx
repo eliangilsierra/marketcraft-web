@@ -8,8 +8,9 @@ import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { useCartStore } from '@/lib/state/useCartStore';
 import { useAuthStore } from '@/lib/state/useAuthStore';
 import { useOrderStore } from '@/lib/state/useOrderStore';
-import { products } from '@/mocks/seeds';
+import { getProductById } from '@/lib/repositories/productRepository';
 import { formatCOP, calculateDiscountPrice } from '@/lib/utils/currency';
+import { calculateShippingCOP } from '@/lib/shipping';
 import { toast } from 'sonner';
 import { CheckCircle } from 'lucide-react';
 import { Separator } from '@/components/ui/separator';
@@ -41,7 +42,7 @@ export default function Checkout() {
   }
 
   const subtotal = getTotal();
-  const shipping = subtotal > 100000 ? 0 : 15000;
+  const shipping = calculateShippingCOP(subtotal);
   const total = subtotal + shipping;
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -207,7 +208,7 @@ export default function Checkout() {
 
                 <div className="space-y-3 mb-6">
                   {items.map((item) => {
-                    const product = products.find((p) => p.id === item.productId);
+                    const product = getProductById(item.productId);
                     if (!product) return null;
                     const finalPrice = product.discount
                       ? calculateDiscountPrice(product.priceCOP, product.discount)

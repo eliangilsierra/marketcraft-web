@@ -6,7 +6,7 @@ import { Card } from '@/components/ui/card';
 import { EmptyState } from '@/components/EmptyState';
 import { useAuthStore } from '@/lib/state/useAuthStore';
 import { useOrderStore } from '@/lib/state/useOrderStore';
-import { products } from '@/mocks/seeds';
+import { getProductById } from '@/lib/repositories/productRepository';
 import { formatCOP } from '@/lib/utils/currency';
 import { format } from 'date-fns';
 import { es } from 'date-fns/locale';
@@ -125,7 +125,7 @@ export default function Pedidos() {
                           <h4 className="font-semibold mb-3">Productos</h4>
                           <div className="space-y-3">
                             {order.items.map((item) => {
-                              const product = products.find((p) => p.id === item.productId);
+                              const product = getProductById(item.productId);
                               if (!product) return null;
 
                               return (

@@ -69,7 +69,7 @@ export interface Filters {
   categoryId?: string;
   minPrice?: number;
   maxPrice?: number;
-  sort?: 'price-asc' | 'price-desc' | 'rating' | 'newest';
+  sort?: 'featured' | 'price-asc' | 'price-desc' | 'rating' | 'newest';
 }
 
 export interface PaginationParams {

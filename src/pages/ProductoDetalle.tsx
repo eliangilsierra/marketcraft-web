@@ -11,8 +11,10 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
-import { products, categories } from '@/mocks/seeds';
+import { getProductBySlug, getRelatedProducts } from '@/lib/repositories/productRepository';
+import { getCategoryById } from '@/lib/repositories/categoryRepository';
 import { formatCOP, calculateDiscountPrice } from '@/lib/utils/currency';
+import { FREE_SHIPPING_THRESHOLD_COP } from '@/lib/constants';
 import { useCartStore } from '@/lib/state/useCartStore';
 import { useFavoritesStore } from '@/lib/state/useFavoritesStore';
 import { toast } from 'sonner';
@@ -22,7 +24,7 @@ import { ProductCard } from '@/components/ProductCard';
 export default function ProductoDetalle() {
   const { slug } = useParams();
   const navigate = useNavigate();
-  const product = products.find((p) => p.slug === slug);
+  const product = slug ? getProductBySlug(slug) : undefined;
   const addItem = useCartStore((state) => state.addItem);
   const { isFavorite, toggleFavorite } = useFavoritesStore();
   const [selectedImage, setSelectedImage] = useState(0);
@@ -40,14 +42,12 @@ export default function ProductoDetalle() {
     );
   }
 
-  const category = categories.find((c) => c.id === product.categoryId);
+  const category = getCategoryById(product.categoryId);
   const favorite = isFavorite(product.id);
   const finalPrice = product.discount
     ? calculateDiscountPrice(product.priceCOP, product.discount)
     : product.priceCOP;
-  const relatedProducts = products
-    .filter((p) => p.categoryId === product.categoryId && p.id !== product.id)
-    .slice(0, 4);
+  const relatedProducts = getRelatedProducts(product);
 
   const handleAddToCart = () => {
     if (product.stock === 0) {
@@ -243,7 +243,7 @@ export default function ProductoDetalle() {
                   <div>
                     <p className="font-medium">Envío gratis</p>
                     <p className="text-sm text-muted-foreground">
-                      En compras superiores a $100.000
+                      En compras superiores a {formatCOP(FREE_SHIPPING_THRESHOLD_COP)}
                     </p>
                   </div>
                 </div>
